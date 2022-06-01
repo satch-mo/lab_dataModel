@@ -35,7 +35,7 @@ users can create their own occasions and assign recipes to occasions
  marking things as public or private?
  so users can view others recipes, what info does the recipe hold? boolean can share?
 
- PART 3 - sql commands
+ PART 3 - sql commands  REALIZED I NEED ALOT OF MIDDLE TABLES to link relationships
 
  CREATE TABLE users (
   user_id SERIAL PRIMARY KEY,
@@ -44,12 +44,16 @@ users can create their own occasions and assign recipes to occasions
   email VARCHAR(40)
 )
 
+middle table for who likes recipe users/recipes
+
 CREATE TABLE recipes (
   recipe_id SERIAL PRIMARY KEY,
   ingredient VARCHAR(40) REFERENCES ingredients(ingredient),
   shareable BOOLEAN,
   is_public BOOLEAN
 ); 
+
+middle table to connect these two - recipe 1 requires ingredient 2
 
 CREATE TABLE ingredients (
 	ingredient_id SERIAL PRIMARY KEY,
