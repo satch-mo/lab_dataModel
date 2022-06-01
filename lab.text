@@ -1,0 +1,63 @@
+We want to create a recipe creating/sharing and grocery list app. You’ll be planning out what tables we’ll need, what information they’ll store, and how the data will relate to each other.
+
+Features
+users can sign into the app with their email and password
+
+users can create recipes with ingredients and instructions
+
+recipes can be marked as public or private
+
+users can view other people’s recipes
+
+ingredients from recipes can be added to user’s grocery lists
+
+users can create their own occasions and assign recipes to occasions
+
+ BRAINSTORMING
+ -user/email/password
+ -recipes/users
+ -grocery lists/ingredients
+ -occasions/recipes
+
+ table ideas
+ -user table with user_id, email and password (one to many)
+ -recipe table with user_id as foreign key from user table, calling in ingredients (many to many)
+ -ingredients table (one to many)
+ -grocery list able to communicate with ingredients table ()
+ -occasions table able to call items from recipe list
+
+ relationships
+ one to many - user table, ingredients table
+ many to many - grocery list table
+ one to one - userto users bio
+
+ questions: what table do the instructions for recipes go?
+ marking things as public or private?
+ so users can view others recipes, what info does the recipe hold? boolean can share?
+
+ PART 3 - sql commands
+
+ CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  user_name VARCHAR(255),
+  password VARCHAR(30),
+  email VARCHAR(40)
+)
+
+CREATE TABLE recipes (
+  recipe_id SERIAL PRIMARY KEY,
+  ingredient VARCHAR(40) REFERENCES ingredients(ingredient),
+  shareable BOOLEAN,
+  is_public BOOLEAN
+); 
+
+CREATE TABLE ingredients (
+	ingredient_id SERIAL PRIMARY KEY,
+	ingredient VARCHAR(30) NOT NULL,
+	price FLOAT
+ )
+
+ CREATE TABLE grocery_list (
+   list_id SERIAL PRIMARY KEY,
+   ingredient REFERENCES ingredients(ingredient)
+ );
